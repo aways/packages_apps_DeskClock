@@ -30,6 +30,7 @@ import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -43,6 +44,8 @@ public class SettingsActivity extends PreferenceActivity
 
     static final String KEY_ALARM_IN_SILENT_MODE =
             "alarm_in_silent_mode";
+    static final String KEY_SHOW_STATUS_BAR_ICON =
+            "show_status_bar_icon";
     static final String KEY_ALARM_SNOOZE =
             "snooze_duration";
     static final String KEY_VOLUME_BEHAVIOR =
@@ -164,6 +167,10 @@ public class SettingsActivity extends PreferenceActivity
             final ListPreference listPref = (ListPreference) pref;
             final int idx = listPref.findIndexOfValue((String) newValue);
             listPref.setSummary(listPref.getEntries()[idx]);
+        } else if (KEY_SHOW_STATUS_BAR_ICON.equals(pref.getKey())) {
+            // Check if any alarms are active. If yes and
+            // we allow showing the alarm icon, the icon will be shown.
+            Alarms.updateStatusBarIcon(getApplicationContext(), (Boolean) newValue);
         }
         return true;
     }
@@ -184,6 +191,9 @@ public class SettingsActivity extends PreferenceActivity
         updateAutoSnoozeSummary(listPref, delay);
         listPref.setOnPreferenceChangeListener(this);
 
+        CheckBoxPreference hideStatusbarIcon = (CheckBoxPreference) findPreference(KEY_SHOW_STATUS_BAR_ICON);
+        hideStatusbarIcon.setOnPreferenceChangeListener(this);
+
         listPref = (ListPreference) findPreference(KEY_CLOCK_STYLE);
         listPref.setSummary(listPref.getEntry());
         listPref.setOnPreferenceChangeListener(this);
@@ -202,6 +212,7 @@ public class SettingsActivity extends PreferenceActivity
 
         SnoozeLengthDialog snoozePref = (SnoozeLengthDialog) findPreference(KEY_ALARM_SNOOZE);
         snoozePref.setSummary();
+
     }
     /**
      * Returns an array of ids/time zones. This returns a double indexed array
@@ -257,5 +268,6 @@ public class SettingsActivity extends PreferenceActivity
             name.append(" \u2600"); // Sun symbol
         }
         return name.toString();
+
     }
 }

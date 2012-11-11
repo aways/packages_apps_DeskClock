@@ -35,6 +35,12 @@
             android:entryValues="@array/timezone_values"
             android:dialogTitle="@string/home_time_zone_title"
             android:title="@string/home_time_zone" />
+        <CheckBoxPreference
+            android:key="show_status_bar_icon"
+            android:title="@string/show_status_bar_icon_title"
+            android:summary="@string/show_status_bar_icon_summary"
+            android:defaultValue="true"  />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -66,4 +72,5 @@
             android:entryValues="@array/volume_button_setting_values"
             android:defaultValue="1" />
     </PreferenceCategory>
+
 </PreferenceScreen>
