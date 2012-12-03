@@ -17,6 +17,9 @@
 package com.android.deskclock;
 
 import android.app.ActionBar;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -32,6 +35,8 @@ import android.view.MenuItem;
 
 import java.util.Locale;
 import java.util.TimeZone;
+
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 /**
  * Settings for the Alarm Clock.
@@ -60,6 +65,12 @@ public class SettingsActivity extends PreferenceActivity
             "automatic_home_clock";
     static final String KEY_VOLUME_BUTTONS =
             "volume_button_setting";
+    static final String KEY_DIGITAL_CLOCK_TIME_COLOR =
+            "digital_clock_time_color";
+    static final String KEY_DIGITAL_CLOCK_DATE_COLOR =
+            "digital_clock_date_color";
+    static final String KEY_DIGITAL_CLOCK_ALARM_COLOR =
+            "digital_clock_alarm_color";
 
     private static CharSequence[][] mTimezones;
     private long mTime;
@@ -171,6 +182,16 @@ public class SettingsActivity extends PreferenceActivity
             // Check if any alarms are active. If yes and
             // we allow showing the alarm icon, the icon will be shown.
             Alarms.updateStatusBarIcon(getApplicationContext(), (Boolean) newValue);
+        } else if (KEY_DIGITAL_CLOCK_TIME_COLOR.equals(pref.getKey())
+                || KEY_DIGITAL_CLOCK_DATE_COLOR.equals(pref.getKey())
+                || KEY_DIGITAL_CLOCK_ALARM_COLOR.equals(pref.getKey())) {
+            AppWidgetManager widgetManager = AppWidgetManager.getInstance(getApplicationContext());
+            int[] widgetIds = widgetManager.getAppWidgetIds(
+                    new ComponentName(getApplicationContext(), com.android.alarmclock.DigitalAppWidgetProvider.class));
+            Intent update = new Intent(getApplicationContext(), com.android.alarmclock.DigitalAppWidgetProvider.class);
+            update.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+            update.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds);
+            getApplicationContext().sendBroadcast(update);
         }
         return true;
     }
@@ -209,6 +230,15 @@ public class SettingsActivity extends PreferenceActivity
         listPref = (ListPreference) findPreference(KEY_VOLUME_BUTTONS);
         listPref.setSummary(listPref.getEntry());
         listPref.setOnPreferenceChangeListener(this);
+
+        ColorPickerPreference clockTimeColor = (ColorPickerPreference) findPreference(KEY_DIGITAL_CLOCK_TIME_COLOR);
+        clockTimeColor.setOnPreferenceChangeListener(this);
+
+        ColorPickerPreference clockDateColor = (ColorPickerPreference) findPreference(KEY_DIGITAL_CLOCK_DATE_COLOR);
+        clockDateColor.setOnPreferenceChangeListener(this);
+
+        ColorPickerPreference clockAlarmColor = (ColorPickerPreference) findPreference(KEY_DIGITAL_CLOCK_ALARM_COLOR);
+        clockAlarmColor.setOnPreferenceChangeListener(this);
 
         SnoozeLengthDialog snoozePref = (SnoozeLengthDialog) findPreference(KEY_ALARM_SNOOZE);
         snoozePref.setSummary();
