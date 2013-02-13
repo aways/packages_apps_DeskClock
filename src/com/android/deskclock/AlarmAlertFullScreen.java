@@ -366,7 +366,7 @@ public class AlarmAlertFullScreen extends Activity implements GlowPadView.OnTrig
                                 break;
 
                             case 2:
-                                dismiss(false);
+                                dismiss(false, false);
                                 break;
 
                             default:
@@ -425,7 +425,7 @@ public class AlarmAlertFullScreen extends Activity implements GlowPadView.OnTrig
                                 break;
 
                             case 2:
-                                dismiss(false);
+                                dismiss(false, false);
                                 break;
 
                             default:
