@@ -50,7 +50,6 @@ public class DigitalClock extends LinearLayout {
     private ContentObserver mFormatChangeObserver;
     private boolean mLive = true;
     private boolean mAttached;
-    private final Typeface mRobotoBold;
     private final Typeface mRobotoThin;
     private String mTimeZoneId;
 
@@ -115,7 +114,6 @@ public class DigitalClock extends LinearLayout {
 
     public DigitalClock(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mRobotoBold = Typeface.createFromAsset(context.getAssets(),"fonts/Roboto-Bold.ttf");
         mRobotoThin = Typeface.createFromAsset(context.getAssets(),"fonts/Roboto-Thin.ttf");
     }
 
