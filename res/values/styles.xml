@@ -299,37 +299,6 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <!-- Condensed Styling -->
-    <style name="big_con_bold">
-        <item name="android:textSize">@dimen/big_font_size</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">sans-serif-condensed</item>
-    </style>
-
-    <style name="big_con">
-        <item name="android:textSize">@dimen/big_font_size</item>
-        <item name="android:fontFamily">sans-serif-condensed</item>
-    </style>
-
-    <style name="medium_con_bold">
-        <item name="android:textSize">@dimen/medium_font_size</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">sans-serif-condensed</item>
-    </style>
-
-    <style name="medium_con">
-        <item name="android:textSize">@dimen/medium_font_size</item>
-        <item name="android:fontFamily">sans-serif-condensed</item>
-    </style>
-
-    <style name="widget_big_con_bold" parent="big_con_bold">
-        <item name="android:textSize">@dimen/widget_big_font_size</item>
-    </style>
-
-    <style name="widget_big_con_thin" parent="big_con_thin">
-        <item name="android:textSize">@dimen/widget_big_font_size</item>
-    </style>
-
     <!-- Status Bar Styles -->
     <style name="TextAppearance.StatusBar">
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>

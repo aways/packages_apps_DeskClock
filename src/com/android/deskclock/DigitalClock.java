@@ -50,7 +50,7 @@ public class DigitalClock extends LinearLayout {
     private ContentObserver mFormatChangeObserver;
     private boolean mLive = true;
     private boolean mAttached;
-    private final Typeface mRobotoCon;
+    private final Typeface mRobotoThin;
     private String mTimeZoneId;
 
 
@@ -113,8 +113,8 @@ public class DigitalClock extends LinearLayout {
     }
 
     public DigitalClock(Context context, AttributeSet attrs) {
-        super(context, attrs);;
-        mRobotoCon = Typeface.createFromAsset(context.getAssets(),"fonts/RobotoCondensed-Regular.ttf");
+        super(context, attrs);
+        mRobotoThin = Typeface.createFromAsset(context.getAssets(),"fonts/Roboto-Thin.ttf");
     }
 
     @Override
@@ -123,7 +123,7 @@ public class DigitalClock extends LinearLayout {
 
         mTimeDisplayHours = (TextView)findViewById(R.id.timeDisplayHours);
         mTimeDisplayMinutes = (TextView)findViewById(R.id.timeDisplayMinutes);
-        mTimeDisplayMinutes.setTypeface(mRobotoCon);
+        mTimeDisplayMinutes.setTypeface(mRobotoThin);
         mAmPm = new AmPm(this);
         mCalendar = Calendar.getInstance();
 
