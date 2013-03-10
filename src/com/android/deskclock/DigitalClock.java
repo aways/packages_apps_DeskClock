@@ -122,7 +122,6 @@ public class DigitalClock extends LinearLayout {
         super.onFinishInflate();
 
         mTimeDisplayHours = (TextView)findViewById(R.id.timeDisplayHours);
-        mTimeDisplayHours.setTypeface(mRobotoBold);
         mTimeDisplayMinutes = (TextView)findViewById(R.id.timeDisplayMinutes);
         mTimeDisplayMinutes.setTypeface(mRobotoThin);
         mAmPm = new AmPm(this);
